@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIOVIZ - Biometric Audio-Reactive Synthesizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header id="topbar">
+    <div class="topbar-left">
+      <span class="logo">&#9672; BIOVIZ</span>
+    </div>
+    <div class="topbar-center">
+      <span class="label">Input:</span>
+      <div class="meter" id="inputMeter">
+        <div class="meter-fill" id="meterFill"></div>
+      </div>
+      <span class="db-readout" id="dbReadout">-48 dB</span>
+    </div>
+    <div class="topbar-right">
+      <span class="heart-icon">&#9829;</span>
+      <span id="topbarBpm">72</span> BPM
+    </div>
+  </header>
+
+  <!-- MAIN LAYOUT -->
+  <div id="app">
+    <!-- LEFT SIDEBAR -->
+    <aside id="leftSidebar" class="sidebar glass">
+      <h3>Audio Input</h3>
+
+      <div class="control-group">
+        <label class="group-label">Source</label>
+        <div class="radio-group" id="srcSelect">
+          <label class="radio-option"><input type="radio" name="src" value="mic"> Mic</label>
+          <label class="radio-option"><input type="radio" name="src" value="file" checked> File</label>
+          <label class="radio-option"><input type="radio" name="src" value="osc"> Osc</label>
+        </div>
+        <input type="file" id="audioFileInput" accept="audio/*" class="file-input">
+      </div>
+
+      <div class="control-group">
+        <label class="group-label">Gain</label>
+        <input type="range" id="gainSlider" min="-48" max="0" value="-12" step="1" class="slider">
+        <span class="slider-value" id="gainValue">-12 dB</span>
+      </div>
+
+      <div class="control-group">
+        <label class="group-label">Lo Cut</label>
+        <input type="range" id="loCut" min="20" max="800" value="80" step="1" class="slider">
+        <span class="slider-value" id="loCutValue">80 Hz</span>
+      </div>
+
+      <div class="control-group">
+        <label class="group-label">Hi Cut</label>
+        <input type="range" id="hiCut" min="1000" max="20000" value="2000" step="100" class="slider">
+        <span class="slider-value" id="hiCutValue">2000 Hz</span>
+      </div>
+
+      <div class="control-group">
+        <label class="group-label">FFT Size</label>
+        <div class="radio-group" id="fftSizeSelect">
+          <label class="radio-option"><input type="radio" name="fftSize" value="256"> 256</label>
+          <label class="radio-option"><input type="radio" name="fftSize" value="512"> 512</label>
+          <label class="radio-option"><input type="radio" name="fftSize" value="1024" checked> 1024</label>
+          <label class="radio-option"><input type="radio" name="fftSize" value="2048"> 2048</label>
+          <label class="radio-option"><input type="radio" name="fftSize" value="4096"> 4096</label>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="group-label">Smoothing</label>
+        <input type="range" id="smoothing" min="0" max="99" value="80" step="1" class="slider">
+        <span class="slider-value" id="smoothingValue">0.80</span>
+      </div>
+    </aside>
+
+    <!-- CENTER CANVAS -->
+    <main id="center">
+      <canvas id="glCanvas"></canvas>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside id="rightSidebar" class="sidebar glass">
+      <h3>Biometrics</h3>
+
+      <div class="control-group">
+        <label class="group-label">&#9829; BPM</label>
+        <input type="range" id="bpmSlider" min="40" max="120" value="72" step="1" class="slider">
+        <span class="slider-value" id="bpmValue">72</span>
+      </div>
+
+      <div class="control-group">
+        <label class="group-label">HRV Variance</label>
+        <input type="range" id="hrvSlider" min="0" max="100" value="50" step="1" class="slider">
+        <span class="slider-value" id="hrvValue">0.50</span>
+      </div>
+
+      <div class="control-group">
+        <label class="group-label">Breath Rate</label>
+        <input type="range" id="breathSlider" min="8" max="30" value="15" step="1" class="slider">
+        <span class="slider-value" id="breathValue">15</span>
+      </div>
+
+      <div class="control-group">
+        <label class="group-label">Skin Conductance</label>
+        <input type="range" id="skinSlider" min="1" max="50" value="20" step="1" class="slider">
+        <span class="slider-value" id="skinValue">2.0</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="control-group">
+        <label class="group-label">Tempo Map</label>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="tempoMap" value="linked" checked> Linked</label>
+          <label class="radio-option"><input type="radio" name="tempoMap" value="manual"> Manual</label>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="group-label">Wave Mod</label>
+        <div class="radio-group" id="waveModSelect">
+          <label class="radio-option"><input type="radio" name="waveMod" value="0"> Sin</label>
+          <label class="radio-option"><input type="radio" name="waveMod" value="1" checked> Saw</label>
+          <label class="radio-option"><input type="radio" name="waveMod" value="2"> Sqr</label>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- BOTTOM DOCK -->
+  <footer id="bottomDock" class="glass">
+    <div class="transport">
+      <button id="btnPlay" class="transport-btn">&#9654; PLAY</button>
+      <button id="btnStop" class="transport-btn">&#9632; STOP</button>
+      <button id="btnLoop" class="transport-btn" data-active="true">&#8635; LOOP</button>
+      <div class="transport-info">
+        <span>BPM: <strong id="seqBpm">72</strong></span>
+        <span id="timeDisplay">00:00 / 04:00</span>
+      </div>
+    </div>
+    <div class="sequencer">
+      <div class="track-row">
+        <span class="track-label">TRK1</span>
+        <div class="track-cells" data-track="0"></div>
+        <span class="track-map">FFT&rarr;Hght</span>
+      </div>
+      <div class="track-row">
+        <span class="track-label">TRK2</span>
+        <div class="track-cells" data-track="1"></div>
+        <span class="track-map">BPM&rarr;Spd</span>
+      </div>
+      <div class="track-row">
+        <span class="track-label">TRK3</span>
+        <div class="track-cells" data-track="2"></div>
+        <span class="track-map">Skin&rarr;Clr</span>
+      </div>
+      <div class="playhead-track">
+        <div class="playhead" id="playhead"></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
