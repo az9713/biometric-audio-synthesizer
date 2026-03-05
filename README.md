@@ -1,6 +1,6 @@
 # Biometric Audio-Reactive WebGL Synthesizer
 
-A real-time 3D terrain visualizer that dances to music and simulated biometric signals. A 64x64 vertex heightmap mesh is displaced by FFT frequency data, modulated by heart rate, breathing, and skin conductance — all rendered in the browser with raw WebGL and GLSL shaders.
+A real-time 3D terrain visualizer that reacts to **any music or audio source**. A 64x64 vertex heightmap mesh is displaced by FFT frequency data, with optional modulation controls for pulse rate, breathing rhythm, and surface detail — all rendered in the browser with raw WebGL and GLSL shaders. Load any MP3, WAV, OGG, or FLAC file, or use your microphone as a live input.
 
 https://github.com/user-attachments/assets/2ceb1554-931f-45cf-8a78-7f42befb7671
 
@@ -119,11 +119,11 @@ The app starts in **demo mode** automatically — it generates synthetic FFT dat
 | **Lo Cut / Hi Cut** | Filters which frequencies reach the terrain |
 | **FFT Size** | More bins = finer frequency detail, fewer = faster response |
 | **Smoothing** | Higher = smoother terrain movement, lower = more reactive |
-| **BPM** (40-120) | Simulated heart rate — drives the pulsing rhythm |
-| **HRV** | Heart rate variability — adds organic randomness |
+| **BPM** (40-120) | Pulse rate — drives the pulsing rhythm of the terrain |
+| **HRV** | Variance — adds organic randomness to the pulse |
 | **Breath Rate** (8-30) | Creates slow wave-like undulations |
 | **Skin Conductance** | Higher = more wireframe grid detail and visual complexity |
-| **Wave Mod** (Sin/Saw/Sqr) | Changes the shape of the biometric pulse |
+| **Wave Mod** (Sin/Saw/Sqr) | Changes the shape of the modulation pulse |
 | **Sequencer tracks** | Click cells to toggle — modulates height, speed, and color over time |
 
 ---
