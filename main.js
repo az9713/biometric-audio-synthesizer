@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-// BIOVIZ — Biometric Audio-Reactive WebGL Synthesizer
+// Biometric Audio-Reactive WebGL Synthesizer
 // ═══════════════════════════════════════════════════════════════
 
 // ── SHADER SOURCES ──

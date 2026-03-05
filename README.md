@@ -1,4 +1,4 @@
-# BIOVIZ — Biometric Audio-Reactive WebGL Synthesizer
+# Biometric Audio-Reactive WebGL Synthesizer
 
 A real-time 3D terrain visualizer that dances to music and simulated biometric signals. A 64x64 vertex heightmap mesh is displaced by FFT frequency data, modulated by heart rate, breathing, and skin conductance — all rendered in the browser with raw WebGL and GLSL shaders.
 
@@ -31,7 +31,6 @@ The demo video ([docs/demo.mp4](docs/demo.mp4)) features music by **STAROSTIN** 
 No build tools, no dependencies. Just a static file server:
 
 ```bash
-cd bioviz
 python -m http.server 3001
 ```
 
@@ -86,21 +85,20 @@ The app starts in **demo mode** automatically — it generates synthetic FFT dat
 ## Project Structure
 
 ```
-claude_code_build_mark_kashef/
-  bioviz/
-    index.html          # App layout — topbar, sidebars, canvas, sequencer
-    style.css           # Glassmorphism panels, spring animations, sequencer grid
-    main.js             # WebGL terrain, GLSL shaders, Web Audio API, UI bindings
+biometric-audio-synthesizer/
+  index.html              # App layout — topbar, sidebars, canvas, sequencer
+  style.css               # Glassmorphism panels, spring animations, sequencer grid
+  main.js                 # WebGL terrain, GLSL shaders, Web Audio API, UI bindings
   docs/
-    gemini3.1_proposal.md   # Original idea from Gemini 3.1
-    demo.mp4                # Demo video (placeholder)
-  biometric-audio-synth-design.md   # Full ASCII DSL design document
+    gemini3.1_proposal.md             # Original idea from Gemini 3.1
+    biometric-audio-synth-design.md   # Full ASCII DSL design document
+    demo_compressed.mp4               # Demo video
   README.md
 ```
 
 ## Design Document
 
-The full architecture is documented in [`biometric-audio-synth-design.md`](biometric-audio-synth-design.md), which contains:
+The full architecture is documented in [`docs/biometric-audio-synth-design.md`](docs/biometric-audio-synth-design.md), which contains:
 
 1. **Spatial Grid** — ASCII wireframe of the complete UI topology
 2. **Kinetic Ledger** — Spring physics (stiffness, damping, mass) and intersection observer triggers for every interactive element
