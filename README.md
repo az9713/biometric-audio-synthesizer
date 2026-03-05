@@ -4,6 +4,52 @@ A real-time 3D terrain visualizer that dances to music and simulated biometric s
 
 https://github.com/user-attachments/assets/2ceb1554-931f-45cf-8a78-7f42befb7671
 
+### Original ASCII Wireframe (from Gemini 3.1)
+
+The design started as this ASCII specification — compare it with the final application above:
+
+```
+====================================================================
+                        SPATIAL GRID (Z-INDEX MAP)
+====================================================================
+[z:50] ┌─────────────────┐ [z:10] <WebGL_Viewport>  ┌─────────────────┐ [z:50]
+       │ AUDIO <Stream>  │                          │ BIOMETRIC       │
+       │ ├─ Mic Input    │      /\      /\          │ <Stream>        │
+       │ ├─ Gain: 0.8    │     /  \____/  \         │ ├─ BPM: 120     │
+       │ ├─ LowPass: On  │    |   CORE     |        │ ├─ Sync: [Kin]  │
+       │ └─ [Kinetic_1]  │     \  /    \  /         │ └─ [Kinetic_2]  │
+       └─────────────────┘      \/      \/          └─────────────────┘
+             |                                              |
+[z:100] ┌────┴──────────────────────────────────────────────┴────┐
+        │ <Kinetic_Sequencer> [ > ] Play   [ || ] Pause          │
+        └────────────────────────────────────────────────────────┘
+
+====================================================================
+                        KINETIC LEDGER
+====================================================================
+[Kinetic_1] HoverState: { scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 10 } }
+[Kinetic_2] ToggleState: { backgroundColor: "#FF3366", transition: { ease: [0.32, 0.72, 0, 1], duration: 0.6 } }
+<Kinetic_Sequencer> Entry: { y: 100 -> 0, opacity: 0 -> 1, type: "spring", mass: 1.2 }
+
+====================================================================
+                    Z-STACK & SHADER LEDGER
+====================================================================
+Layer 10 (Base): R3F Canvas.
+-> Vertex Shader: `position += normal * (u_audioLowFreq * 2.0) * sin(time);`
+-> Fragment Shader: `gl_FragColor = vec4(u_bpmPulse, u_audioHighFreq, 1.0, 1.0);`
+Layer 50 (Sidebars): CSS `backdrop-filter: blur(24px) saturate(150%);` background `rgba(10,10,10,0.4)`.
+
+====================================================================
+                    MULTIMODAL I/O CONTRACT
+====================================================================
+1. Web Audio API requested via `navigator.mediaDevices.getUserMedia({ audio: true })`.
+2. Stream piped to `AudioContext.createMediaStreamSource()`.
+3. Routed to `AnalyserNode` (fftSize: 1024).
+4. `requestAnimationFrame` loop extracts `getByteFrequencyData` into `Uint8Array`.
+5. Low-frequency bins (0-10) averaged and normalized (0.0 - 1.0).
+6. Value bound to R3F `useFrame` hook and injected into shader uniform `u_audioLowFreq`.
+```
+
 ---
 
 ## Inspiration
