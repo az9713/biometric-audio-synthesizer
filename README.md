@@ -112,24 +112,7 @@ The full architecture is documented in [`biometric-audio-synth-design.md`](biome
 
 ## Acknowledgments
 
-This project exists because of the generosity, creativity, and brilliance of many people and tools. We are deeply grateful to every one of them:
-
-**Mark Kashef** — For the insight that changed how we think about building with AI. Your video ["Every Claude Code Build Should Start Like This"](https://www.youtube.com/watch?v=3qUg57KGSVY) introduced the ASCII-first design methodology that became the foundation of this project. The idea that a simple text wireframe can serve as a rigorous specification — saving tokens, reducing ambiguity, and producing better results — is both elegant and powerful. Thank you for sharing it with the community.
-
-**Google Gemini 3.1** — For the original creative spark. The proposal to extend ASCII wireframing from dashboards into a biometric audio synthesizer was imaginative and ambitious. It pushed the methodology into uncharted territory — real-time WebGL, GLSL shaders, Web Audio API pipelines — and proved that the approach scales far beyond its original scope. Thank you for dreaming big.
-
-**Anthropic and Claude Code (Opus 4.6)** — For the implementation engine that turned a design document into a working application. From architecting the four-section ASCII DSL to writing GLSL shaders, building the Web Audio pipeline, implementing spring physics animations, and debugging WebGL texture sampling — all in a single session. The depth of capability is remarkable. Thank you for building tools that make ambitious projects accessible.
-
-**STAROSTIN** — For the wonderful ["Comedy Cartoon Funny Background Music"](https://pixabay.com/music/comedy-cartoon-funny-background-music-492540/) used in the demo video. Your music brought the terrain to life and made the demo a joy to watch. Thank you for sharing your art freely on Pixabay.
-
-**Pixabay** — For providing a platform where creators share high-quality music and media under generous licenses, making projects like this possible without legal friction. Thank you for fostering creative collaboration.
-
-**The Web Standards Community** — For WebGL, Web Audio API, the `AnalyserNode`, `requestAnimationFrame`, CSS `backdrop-filter`, and the Intersection Observer API. Every piece of this application is built on open web standards that work in any modern browser, with no dependencies or build tools. The open web is a gift. Thank you to everyone who designs, implements, and maintains these specifications.
-
-**The Open Source Community** — For Python's `http.server` (which serves this app with zero configuration), for browsers that run GLSL shaders at 60fps, and for the countless tools and libraries that make modern development possible. Thank you.
-
-**You, the reader** — For taking the time to explore this project. Whether you're here to learn about ASCII-first design, WebGL terrain rendering, Web Audio pipelines, or just to watch a 3D landscape dance to music — thank you. We hope it inspires you to build something wonderful.
-
----
-
-*Built with care, curiosity, and gratitude.*
+- **[Mark Kashef](https://www.youtube.com/watch?v=3qUg57KGSVY)** — for the ASCII-first design methodology that inspired this project
+- **STAROSTIN** — for the fun ["Comedy Cartoon Funny Background Music"](https://pixabay.com/music/comedy-cartoon-funny-background-music-492540/) used in the demo
+- **Google Gemini 3.1** — for the creative idea of applying ASCII art design to a multimodal application
+- **Claude Code (Opus 4.6)** — for the implementation, shaders, audio pipeline, and documentation
