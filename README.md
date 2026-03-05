@@ -2,9 +2,7 @@
 
 A real-time 3D terrain visualizer that dances to music and simulated biometric signals. A 64x64 vertex heightmap mesh is displaced by FFT frequency data, modulated by heart rate, breathing, and skin conductance — all rendered in the browser with raw WebGL and GLSL shaders.
 
-https://github.com/user-attachments/assets/PLACEHOLDER-REPLACE-WITH-DEMO-VIDEO-URL
-
-> **Demo video placeholder** — will be replaced with the actual GitHub-hosted video URL via issue.
+https://github.com/user-attachments/assets/2ceb1554-931f-45cf-8a78-7f42befb7671
 
 ---
 
